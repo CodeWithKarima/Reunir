@@ -1,0 +1,105 @@
+<!-- Fichier : login-preliminary.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pop-up de Connexion</title>
+  <style>
+    /* Styles généraux */
+    html, body {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f4f4f4;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Styles du pop-up de connexion préliminaire */
+    #popup-container {
+      width: 300px;
+      background-color: #fff;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+      animation: slide-in 0.5s ease;
+    }
+
+    @keyframes slide-in {
+      from {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    #popup-container h2 {
+      margin-top: 0;
+    }
+
+    #login-form label,
+    #login-form input {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    #login-form button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div id="popup-container">
+    <h2>Connexion</h2>
+    <form id="login-form">
+      <label for="username">Nom d'utilisateur :</label>
+      <input type="text" id="username" name="username" required>
+
+      <label for="password">Mot de passe :</label>
+      <input type="password" id="password" name="password" required>
+
+      <button type="submit">Se connecter</button>
+    </form>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var popup = document.getElementById("popup-container");
+
+      function animatePopupOut() {
+        popup.style.animation = "slide-out 0.5s ease";
+        popup.addEventListener("animationend", function() {
+          popup.parentNode.removeChild(popup);
+        });
+      }
+
+      document.getElementById("login-form").addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+
+        // Vérification des informations d'identification (exemple simplifié)
+        if (username === "admin" && password === "123456") {
+          // Redirection vers la fenêtre de connexion principale
+          window.location.href = "page-principale.html";
+        } else {
+          alert("Identifiants invalides. Veuillez réessayer.");
+        }
+      });
+
+      // Fermeture automatique du pop-up après quelques secondes (exemple)
+      setTimeout(animatePopupOut, 5000);
+    });
+  </script>
+</body>
+</html>
